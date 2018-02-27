@@ -12,7 +12,7 @@ app.secret_key = os.urandom(32)
 
 """
 /r/deepfriedmemes
-dataset of /r/deepfriedmemes' posts. 
+dataset of /r/deepfriedmemes' posts.
 
 Link:https://www.reddit.com/r/deepfriedmemes.json
 
@@ -20,7 +20,7 @@ Import:
     1) import json; requests
     2) store Json in var
     3) Use requests to get the json file from the URL + decode it
-    4) use json to decode webpage to json 
+    4) use json to decode webpage to json
     5) insert into db
 """
 connection = pymongo.MongoClient("149.89.150.100")
@@ -41,6 +41,7 @@ def root():
 def query():
     x = request.form["query"]
     flash(author(x))
+    print "hello" + author(x).encode("utf-8");
     return render_template("base.html")
 
 for each in posts:
@@ -76,10 +77,14 @@ def upvotes(x):
 
 def author(x):
     x = collection.find({"data.author" : x})
+    string = ""
     for each in x:
-        return "Title:" + each["data"]["title"] + "IMG" + each["data"]["url"]
-        print "###################"
-    return x
+        string = "Title: " + each["data"]["title"] + " " + "IMG: " + each["data"]["url"]
+        print each
+        #print "//"
+        #print string.encode("utf-8");
+        #print "###################"
+    return string
 
 
 def bemoji():
