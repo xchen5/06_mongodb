@@ -8,13 +8,12 @@
   
 
   <body>
+    <center>
       {% set messages = get_flashed_messages() %}
       {% for each in messages %}
         <h3>{{each}}</h3>
         <br>
-        <img src="{{img}}">
       {% endfor %}
-    <center>
         Find posts made by a specific reddit user:
             <form method= "POST" action="/query">
                 <h1>Query</h1>
